@@ -1,0 +1,75 @@
+
+<ons-page ng-controller="cast_c_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">キャスト経費(月別)</div>
+    </ons-toolbar>
+    </br>
+    <select ng-options="casts for casts in cast" ng-model="one.nam"></select>
+    <input type="text" ng-model="one.itm" placeholder="項目名" size="7px"/>
+    <input type="number" ng-model="one.pri" placeholder="金額" style="width:100px"/></br>
+    <ons-button ng-click="one_add()">追加</ons-button>
+    <ons-button ng-click="one_del()">削除</ons-button>
+    
+    <!-- 折り畳み展開ポインタ -->
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+        <a style="cursor:pointer;">■アイコン設置■</a>
+        </div>
+        <!--// 折り畳み展開ポインタ -->
+         
+        <!-- 折り畳まれ部分 -->
+        <div id="open" style="display:none;clear:both;">
+            <table class="table">
+                <tr>
+                    <td>名前</td><td>項目</td><td>金額</td><td>削除</td>
+                </tr>
+                <tr ng-repeat="excs in exc">
+                    <td>{{excs.nam}}</td><td>{{excs.itm}}</td><td>{{excs.pri}}</td><td><input type="checkbox" ng-model="excs.del"/> </td>
+                </tr>
+            </table>
+        <!--ここの部分が折りたたまれる＆展開される部分になります。
+        自由に記述してください。-->
+        </div>
+        <!--// 折り畳まれ部分 -->
+    
+    <hr/>
+    <table  ng-repeat="cast in cast_c">
+        <tr>
+            <td>{{cast.nam}} ： </td>
+        </tr>
+        <tr>
+    		<td><input type="text" id="min{{$index}}" ng-model="cast.min" placeholder="給料マイナス" size="7px"/></td>
+            <td><input type="text" id="set{{$index}}" ng-model="cast.set" placeholder="ヘアセット" size="7px"/></td>
+            <td><input type="text" id="ryo{{$index}}" ng-model="cast.ryo" placeholder="寮" size="7px"/></td>
+            <td><input type="text" id="ren{{$index}}" ng-model="cast.ren" placeholder="レンタル" size="7px"/></td>
+    	</tr>
+        <tr>
+            <td><input type="text" id="sou{{$index}}" ng-model="cast.sou" placeholder="送迎" size="7px"/></td>
+            <td><input type="text" id="cle{{$index}}" ng-model="cast.cle" placeholder="クリーニング" size="7px"/></td>
+            <td><input type="text" id="mei{{$index}}" ng-model="cast.mei" placeholder="名刺" size="7px"/></td>
+            <td><input type="text" id="cp{{$index}}" ng-model="cast.cp" placeholder="キャンペーン" size="7px"/></td>
+        </tr>
+    </table>
+    <ons-button ng-click="cast_c_add()">追加</ons-button>
+    
+</ons-page>
+<!-- 
+ng-disabled="cost_form.$invalid">OK
+
+<p ng-repeat="cast in casts">
+        
+            {{cast}}：
+            <input type="text" id="dp{{$index}}" ng-model="cast.dp" placeholder="給料マイナス" size="7px"/>
+            <input type="text" id="set{{$index}}" ng-model="cast.set" placeholder="ヘアメイク" size="4px"/></br>
+            <input type="text" id="ryo{{$index}}" ng-model="cast.ryo" placeholder="寮" size="2px"/>
+            <input type="text" id="ren{{$index}}" ng-model="cast.ren" placeholder="レンタル" size="2px"/>
+            <input type="text" id="sou{{$index}}" ng-model="cast.sou" placeholder="送迎" size="2px"/></br>
+            <input type="text" id="mei{{$index}}" ng-model="cast.mei" placeholder="名刺" size="2px"/>
+            <input type="text" id="etc{{$index}}" ng-model="cast.etc" placeholder="その他" size="2px"/></br>
+            <p>----------------------------------</p>
+
+    </p>
+    <input type="text" ng-model="one.nam" placeholder="名前" size="7px"/>
+<ons-button ng-click="cast_c_del()">消去</ons-button>
+
+-->

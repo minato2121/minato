@@ -1,0 +1,79 @@
+<ons-page ng-controller="PageController">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">名前：{{simeis["0"].nam}}  卓番：{{simeis["0"].tab}}  IN：{{simeis["0"].in}}</div>
+    </ons-toolbar>
+    <p>現会計 ： {{order.total}}</p>
+
+        <!-- 折り畳み展開ポインタ -->
+        <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+        <a style="cursor:pointer;">■アイコン設置■</a>
+        </div>
+        <!--// 折り畳み展開ポインタ -->
+         
+        <!-- 折り畳まれ部分 -->
+        <div id="open" style="display:none;clear:both;">
+        <form name="orders_form" id="test">
+            <table class="table">
+                <tr>
+                    <td>項目</td>
+                </tr>
+                <tr ng-repeat="order in orders | orderBy: ['class','price']">
+                    <td>{{order.itm}}　　　個数：{{order.cnt}}　　　単価：{{order.pri}}</td>
+                </tr>
+            </table>
+        </form>
+        <!--ここの部分が折りたたまれる＆展開される部分になります。
+        自由に記述してください。-->
+        </div>
+        <!--// 折り畳まれ部分 -->
+    <br />
+    <form name="order_form" id="order_form" novalidata>
+        <ons-button ng-click="orderadd()" ng-disabled="order_form.$invalid">追加</ons-button>
+        <ons-button ng-click="orderclr()">クリア</ons-button>
+        <ons-button ng-click="fillshow()">チェック</ons-button>
+        <hr />
+        <input type="text" style="width:130px" ng-model="order.exc.item" ng-init="order.exc.item = ''" placeholder="品名"/>
+        <input type="number" style="width:85px" ng-model="order.exc.price" ng-init="order.exc.price = ''" placeholder="単価"/>
+        <input type="number" style="width:40px" ng-model="order.exc.cnt" ng-init="order.exc.cnt = ''" placeholder="個数"/>
+        
+            <table class="table">
+                <tr>
+                    <td>品名</td><td>単価</td><td>個数</td>
+                </tr>
+                <tr ng-repeat="menu in menus | orderBy: ['class','price']">
+                    <td>{{menu.item}}</td>
+                    <td>{{menu.price|currency:'￥':0}}</td>
+                    <td>
+                    <input type="number" name="{{menu.item}}Д{{menu.price}}Д{{menu.class}}" maxlength="2" style="width:35px"/>
+                    </td>
+                </tr>
+            </table>
+        <!-- <div style="width:300px;height:350px;overflow:auto;"></div> -->
+    </form>
+    
+    <ons-template id="file.html">
+        <ons-dialog var="dialog" cancelable>
+            <ons-toolbar inline>
+                <div class="center">
+                    入力
+                </div>
+            </ons-toolbar>
+            <input type="text" name="guest" ng-model="Data.guest" ng-init="Data.guest = ''" placeholder="お客様名　*掛けの場合必須">
+            <input type="text" name="pay" ng-model="Data.pay" ng-init="Data.pay = ''" placeholder="現金入金額　*任意入力">
+            <input type="text" name="card" ng-model="Data.card" ng-init="Data.card = ''" placeholder="カード入金額　*任意入力">
+            <input type="text" name="ahead" ng-model="Data.ahead" ng-init="Data.ahead = ''" placeholder="自腹額　*任意入力">
+            <p>
+                <ons-button modifier="large" ng-click="orderfill()">上記の内容でチェック</ons-button>
+            </p>
+        </ons-dialog>
+    </ons-template>
+</ons-page>
+<!-- 
+
+orderchk()
+<input type="text" name="guest" ng-model="order.guest" ng-init="order.guest = ''" placeholder="お客様名　*掛けの場合必須">
+            <input type="text" name="pay" ng-model="order.pay" ng-init="order.pay = ''" placeholder="現金入金額　*任意入力">
+            <input type="text" name="card" ng-model="order.card" ng-init="order.card = ''" placeholder="カード入金額　*任意入力">
+            <input type="text" name="ahead" ng-model="order.ahead" ng-init="order.ahead = ''" placeholder="自腹額　*任意入力">
+-->

@@ -1,0 +1,29 @@
+<ons-page ng-controller="pay_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button >Back</ons-back-button></div>
+        <div class="center">売掛表</div>
+    </ons-toolbar>
+    <br />
+    <form name="pay_form" id="pay_form" novalidate>
+                <select name="pay.nam" ng-model="pay.nam" required>
+                    <option ng-repeat="casts in cast">{{casts.nam}}</option>
+                </select>
+                <input id="nam" type="text" class="text-input--underbar" placeholder="お客様名" ng-model="pay.gue"/>
+            <br/>
+            <ons-button ng-click="onadd()" ng-disabled="pay_form.$invalid">追加</ons-button>
+            <ons-button ng-click="pay_show()" ng-disabled="pay_form.$invalid">表示</ons-button>
+        <hr />
+        
+            <table>
+                <tr>
+                    <td>日付</td><td>名前</td><td>金額</td>
+                </tr>          
+                <tr ng-repeat="pay in pays">
+                    <td>{{pay.ID}}</td>
+                    <td>{{pay.NAME}}</td>
+                    <td>{{pay.PASS}}</td>
+                </tr>  
+            </table>
+        <!-- <div style="width:315px;height:350px;overflow:auto;"></div>  -->
+    </form>
+</ons-page>

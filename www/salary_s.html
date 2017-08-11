@@ -1,0 +1,126 @@
+<ons-page ng-controller="salary_s_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">給料システム</div>
+    </ons-toolbar>
+    <label><input type="radio" name="s.type" value="a" ng-model="s.type"style="display:inline-block; width:15px;" ng-init="s.type = 'a'"/>売上･日給･売上バック</label><br />
+    <label><input type="radio" name="s.type" value="b" ng-model="s.type"style="display:inline-block; width:15px;"/>本指名</label>
+    <label><input type="radio" name="s.type" value="c" ng-model="s.type"style="display:inline-block; width:15px;"/>紹介</label></li>
+    <label><input type="radio" name="s.type" value="d" ng-model="s.type"style="display:inline-block; width:15px;"/>同伴</label></li><br />
+    <label><input type="radio" name="s.type" value="e" ng-model="s.type"style="display:inline-block; width:15px;"/>ヘルプ指名･場内指名</label></li><br />
+        <div ng-if="s.type == 'a'"> 
+            売上：
+            <input type="number" ng-model="s.min" style="display:inline-block; width:110px;"/>
+            ~
+            <input type="number" ng-model="s.max" style="display:inline-block; width:110px;"/></br>
+            日給：
+            <input type="number" ng-model="s.pri" style="display:inline-block; width:110px;"/></br>
+            売上バック：
+            <input type="number" ng-model="s.bac" style="display:inline-block; width:110px;"/>
+        </div>
+        <div ng-if="s.type == 'b' || s.type == 'c' || s.type == 'd' || s.type == 'e'">
+            本数：
+            <input type="number" ng-model="s.min" style="display:inline-block; width:110px;"/>
+            ~
+            <input type="number" ng-model="s.max" style="display:inline-block; width:110px;"/></br>
+            値段：
+            <input type="number" ng-model="s.pri" style="display:inline-block; width:110px;"/></br>
+        </div>
+        
+        <ons-button ng-click="s_add()">追加</ons-button>
+        <ons-button ng-click="s_era()">消去</ons-button>
+        <hr />
+        <table border="1" class="table">
+            <tr>
+                <td>売上</td><td>日給</td><td>売上バック</td>
+            </tr>
+            <tr ng-repeat="as in a | orderBy: ['min']" ng-click="">
+                <td><ons-list>
+                    <ons-list-item>
+                        <ons-gesture-detector ng-hold="h_s(as)">
+                            {{as.min|number}}
+                        </ons-gesture-detector>
+                    </ons-list-item>
+                </ons-list></td><td>{{as.pri|number}}</td><td>{{as.bac+'%'}}</td>
+            </tr>
+        </table>
+        
+        <table border="1" class="table">
+            <tr>
+                <td>指名本数</td><td>金額</td>
+            </tr>
+            <tr ng-repeat="bs in b | orderBy: ['min']" ng-click="">
+                <td><ons-list>
+                    <ons-list-item>
+                        <ons-gesture-detector ng-hold="h_s(bs)">
+                            {{bs.min|number}}
+                        </ons-gesture-detector>
+                    </ons-list-item>
+                </ons-list></td><td>{{bs.pri|number}}</td>
+            </tr>
+        </table>
+        
+        <table border="1" class="table">
+            <tr>
+                <td>紹介本数</td><td>金額</td>
+            </tr>
+            <tr ng-repeat="cs in c | orderBy: ['min']" ng-click="">
+                <td><ons-list>
+                    <ons-list-item>
+                        <ons-gesture-detector ng-hold="h_s(cs)">
+                            {{cs.min|number}}
+                        </ons-gesture-detector>
+                    </ons-list-item>
+                </ons-list></td><td>{{cs.pri|number}}</td>
+            </tr>
+        </table>
+        
+        <table border="1" class="table">
+            <tr>
+                <td>同伴本数</td><td>金額</td>
+            </tr>
+            <tr ng-repeat="ds in d | orderBy: ['min']" ng-click="">
+                <td><ons-list>
+                    <ons-list-item>
+                        <ons-gesture-detector ng-hold="h_s(ds)">
+                            {{ds.min|number}}
+                        </ons-gesture-detector>
+                    </ons-list-item>
+                </ons-list></td><td>{{ds.pri|number}}</td>
+            </tr>
+        </table>
+        
+        <table border="1" class="table">
+            <tr>
+                <td>ヘルプ･場内本数</td><td>金額</td>
+            </tr>
+            <tr ng-repeat="es in e | orderBy: ['min']" ng-click="">
+                <td><ons-list>
+                    <ons-list-item>
+                        <ons-gesture-detector ng-hold="h_s(es)">
+                            {{es.min|number}}
+                        </ons-gesture-detector>
+                    </ons-list-item>
+                </ons-list></td><td>{{es.pri|number}}</td>
+            </tr>
+        </table>
+</ons-page>
+<!-- 
+<div ng-if="s.type == 'c'">
+            本数：
+            <input type="number" ng-model="s.min" style="display:inline-block; width:110px;"/>
+            ~
+            <input type="number" ng-model="s.max" style="display:inline-block; width:110px;"/></br>
+            値段：
+            <input type="number" ng-model="s.dil" style="display:inline-block; width:110px;"/></br>a
+        </div>
+        
+        <ons-list>
+            <ons-list-item>
+                <ons-gesture-detector ng-hold="h_del(as)">
+                    売上：{{as.min}}・日給：{{as.pri}}・売上バック：{{as.bac+'%'}}
+                </ons-gesture-detector>
+            </ons-list-item>
+        </ons-list>
+        
+-->

@@ -1,0 +1,19 @@
+<ons-page ng-controller="pay_s_sou_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">給料明細-総合</div>
+    </ons-toolbar>
+    <hr />
+    <p>
+        合計 : {{allsum|number}}
+    </p>
+    <table class="all_t" border="1">
+        <tr>
+    		<td>名前</td><td>金額</td>
+    	</tr>
+        <tr ng-repeat="itm in total">
+        	<td>{{itm.nam}}</td><td>{{itm.pri|number}}</td>
+    	</tr>
+    </table>
+    
+</ons-page>

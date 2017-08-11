@@ -1,0 +1,37 @@
+<ons-page ng-controller="cast_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button >Back</ons-back-button></div>
+        <div class="center">キャスト管理</div>
+    </ons-toolbar>
+    <br />
+    <form name="user_form" id="user_form" novalidate>
+            <select ng-model="user.myid" required>
+                <option ng-repeat="user in users">{{user.ID}}</option>
+            </select>
+            <input id="name" type="text" required class="text-input--underbar" placeholder="名前" ng-model="user.myname"/>
+            <br/>
+            <input pattern="^[0-9A-Za-z]+$" type="text" class="text-input--underbar" placeholder="新しいパスワード *" ng-model="user.mypass1" ng-init="user.mypass1 = ''"/>
+            <br/>
+            <input pattern="^[0-9A-Za-z]+$" type="text" class="text-input--underbar" placeholder="もう一度入力" ng-model="user.mypass2" ng-init="user.mypass2 = ''"/>
+            <br/>
+            <ons-button ng-click="onadd()" ng-disabled="user_form.$invalid">追加</ons-button>
+            <ons-button ng-click="ondel()" ng-disabled="chkname.$invalid">削除</ons-button>
+        <hr />
+        
+            <table class="table">
+                <tr>
+                    <td>ID</td><td>NAME</td><td>PASS</td>
+                </tr>          
+                <tr ng-repeat="user in users">
+                    <td>{{user.ID}}</td>
+                    <td>{{user.NAME}}</td>
+                    <td>{{user.PASS}}</td>
+                </tr>  
+            </table>
+        <!-- <div style="width:315px;height:350px;overflow:auto;"></div>  -->
+    </form>
+</ons-page>
+<!--デバック用
+<td><input type="radio" name="chk" ng-model="user.chk" value="{{menu.item}}"></td>
+<input id="pass" type="text" required class="text-input--underbar" placeholder="Pass" ng-model="user.pass"/>
+-->

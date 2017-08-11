@@ -1,0 +1,63 @@
+<ons-page ng-controller="schedule_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button >Back</ons-back-button></div>
+        <div class="center">予定表</div>
+    </ons-toolbar>
+
+    <div class="input-group">
+        <input type="text" 
+        class="form-control" 
+        ng-model="datepicker.time"
+        uib-datepicker-popup="{{datepicker.format}}"
+        is-open="datePickerOpen"
+        show-button-bar="false"
+        ng-change="schedule_show()"/>
+    
+        <div class="input-group-addon" ng-click="toggleDatePicker($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+    </div>
+    <hr />
+    <select ng-options=" cast for cast in casts" ng-model="schedule.nam"></select>
+    <label>同伴：<input type="checkbox" ng-model="schedule.dou" ng-init="schedule.dou=false"/></label>
+    <label>新規：<input type="checkbox" ng-model="schedule.sin" ng-init="schedule.sin=false"/></label><br/>
+    予定時間：<input type="text" placeholder="時" ng-model="schedule.tim" ng-init="schedule.tim=''" style="width:50px"/>
+    ：<input type="text" placeholder="分" ng-model="schedule.min" ng-init="schedule.min=''" style="width:50px"/><br />
+    <input type="text" placeholder="お客様名" ng-model="schedule.gue" ng-init="schedule.gue=''" style="width:120px"/>
+    <input type="number" placeholder="予算" ng-model="schedule.bug" ng-init="schedule.bug=''" style="width:100px"/>
+    <input type="textarea" placeholder="備考" ng-model="schedule.rem" ng-init="schedule.rem=''" style="width:100%"/>
+    <ons-button ng-click="onadd()">追加</ons-button>
+    <ons-button ng-click="ondel()">削除</ons-button>
+
+        <table class="" border="1">
+            <tr>
+        		<td><ons-list><ons-list-item>No</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>担当名</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>新規</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>同伴</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>お客様名</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>予定時間</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>予算</ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item>備考</ons-list-item></ons-list></td>
+        	</tr>
+            <tr ng-repeat="s in itm | orderBy: ['tim']">
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{$index+1}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.nam}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.sin}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.dou}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.gue}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.tim}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.pri|number}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item><ons-gesture-detector ng-hold="hold(s)">{{s.rem}}</ons-gesture-detector></ons-list-item></ons-list></td>
+            </tr>
+        </table>
+
+</ons-page>
+<!-- 
+="{{format}}"
+<textarea ng-model="schedule.rem" placeholder="備考" style="width:100%"></textarea>
+<ons-list><ons-list-item ng-click="show()">
+                    {{item.sub}}
+                </ons-list-item></ons-list>
+                <ons-gesture-detector ng-hold="hold(itms.itm)">{{itms.itm}}</ons-gesture-detector>
+-->

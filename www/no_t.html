@@ -1,0 +1,19 @@
+<ons-page ng-controller="no_t_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">No表</div>
+    </ons-toolbar>
+    <table class="no_t" border="1">
+            <tr>
+                <td>No</td><td>売上</td><td>指名</td><td>紹介</td><td>新規</td><td>送り</td>
+            </tr>
+            <tr ng-repeat="no in no_t" ng-class-even="" >
+                <td>{{$index+1}}</td>
+                <td>{{no.uri}}</td>
+                <td>{{no.sim}}</td>
+                <td>{{no.syo}}</td>
+                <td>{{no.sin}}</td>
+                <td>{{no.oku}}</td>
+            </tr>
+    </table>
+</ons-page>

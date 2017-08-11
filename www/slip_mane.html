@@ -1,0 +1,45 @@
+<ons-page ng-controller="DialogController">    
+    <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">伝票管理</div>
+    </ons-toolbar> 
+    <form name="simei_form" ng-if="show == true" novalidata>
+        <select ng-options="cast for cast in casts" ng-model="simei.nam" ng-change="slip_c()" style="display:inline-block; width:200px;"></select>
+        <label class="right"><input type="checkbox" name="flag" value="1" ng-model="simei.flag" ng-init="simei.flag= false"/>枝</label>
+        <label class="right"><input type="checkbox" name="flag_w" value="1" ng-model="simei.fw" ng-init="simei.fw= false" ng-change="slip_c()"/>W指名</label>
+        <input type="text" name="table" ng-model="simei.w" ng-show="flg.w" placeholder="W指名 *区切り文字｢。｣ or ｢．｣" ng-init="simei.w= ''" class="text-input--underbar"/>
+        <input type="text" name="table" ng-model="simei.table" placeholder="卓番号 *必須入力" class="text-input--underbar" required/>
+        <input type="text" name="cnt" ng-model="simei.cnt" placeholder="人数 *必須入力" ng-init="simei.cnt='1'" class="text-input--underbar" required/>
+        <input type="text" name="do" ng-model="simei.do" ng-init="simei.do = ''" placeholder="同伴 *任意入力" class="text-input--underbar" />
+        <input type="text" name="new" ng-model="simei.new" ng-init="simei.new = ''" placeholder="新規 *任意入力" class="text-input--underbar" />
+        <input type="text" name="syo" ng-model="simei.syo" ng-init="simei.syo = ''" ng-show="flg.syo" placeholder="紹介者or幹担当 *任意入力 *区切り文字｢。｣ or ｢．｣" class="text-input--underbar" />
+         
+        <input type="text" name="in" ng-model="simei.in" ng-init="simei.in = ''" placeholder="IN時間 *任意入力,0:00-23:59時間表記" class="text-input--underbar" />
+        <br/>
+        <ons-button ng-click="simeiadd()" ng-disabled="simei_form.$invalid">Add</ons-button>
+        <ons-button ng-click="simeicle()">Clear</ons-button>
+        <hr />
+    </form>
+    <table class="all_t">
+        <tr>
+    		<td>名前</td><td>卓番</td><td>IN</td><td>人数</td>
+    	</tr>
+        <tr ng-repeat="simei in simeis">
+        	<td><ons-list><ons-list-item ng-click="show_s(simei.no)"><ons-gesture-detector ng-hold="hold(simei)">{{simei.nam}}</ons-gesture-detector></ons-list-item></ons-list></td>
+            <td><ons-list><ons-list-item ng-click="show_s(simei.no)"><ons-gesture-detector ng-hold="hold(simei)">{{simei.tab}}</ons-gesture-detector></ons-list-item></ons-list></td>
+            <td><ons-list><ons-list-item ng-click="show_s(simei.no)"><ons-gesture-detector ng-hold="hold(simei)">{{simei.in}}</ons-gesture-detector></ons-list-item></ons-list></td>
+            <td><ons-list><ons-list-item ng-click="show_s(simei.no)"><ons-gesture-detector ng-hold="hold(simei)">{{simei.cnt+'名'}}</ons-gesture-detector></ons-list-item></ons-list></td>
+    	</tr>
+    </table>
+    <!--
+    
+    <ons-list><ons-list-item ng-repeat="simei in simeis" ng-click="show(simei.no)"><ons-gesture-detector ng-hold="hold(simei)">
+                {{simei.tab}}    {{simei.nam}}    {{simei.in}}    {{simei.cnt+'名'}}
+    </ons-gesture-detector></ons-list-item></ons-list>
+    -->
+
+</ons-page>
+<!-- 
+
+※複数名の場合は｢｡｣または｢.｣で区切る
+-->

@@ -1,0 +1,43 @@
+<ons-page ng-controller="dat_sou_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">日計表-総合</div>
+    </ons-toolbar>
+    <div class="input-group">
+        <input type="text" 
+        class="form-control" 
+        ng-model="datepicker.time"
+        uib-datepicker-popup="{{datepicker.format}}"
+        is-open="datepicker.open"
+        show-button-bar="false"
+        ng-change="show_this_dat_sou()"/>
+    
+        <div class="input-group-addon" ng-click="toggleDatePicker($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+    </div>
+    <!-- 
+    <input type="nambar" name="year" ng-model="mydate.year" ng-init="mydate.year=''" placeholder="年" size="5" maxlength="4"/>
+    <input type="nambar" name="month" ng-model="mydate.month" ng-init="mydate.month=''" placeholder="月" size="5" maxlength="2"/>
+    <input type="nambar" name="day" ng-model="mydate.day" ng-init="mydate.day=''" placeholder="日" size="5" maxlength="2"/>
+    <input type="submit" value="表示" ng-click="d_show()"/>
+     -->
+    <table class="dat_sou">
+        <tr ng-repeat="itms in dat_sou | orderBy: ['ord']"> 
+            <td><ons-list><ons-list-item ><ons-gesture-detector ng-hold="hold(itms.itm)">{{itms.itm}}</ons-gesture-detector></ons-list-item></ons-list></td>
+            <td><ons-list><ons-list-item ><ons-gesture-detector ng-hold="hold(itms.itm)">{{itms.pri|number}}</ons-gesture-detector></ons-list-item></ons-list></td>
+        </tr>
+    </table>
+</ons-page>
+<!-- 
+
+<ons-list>
+    
+        <ons-list-item ng-repeat="itms in dat_sou | orderBy: ['ord']">
+            <ons-gesture-detector ng-hold="hold(itms.itm)">
+                {{itms.itm}}　　：　　{{itms.pri}}
+            </ons-gesture-detector>
+        </ons-list-item>
+    
+    </ons-list>
+-->

@@ -1,0 +1,76 @@
+
+<ons-page ng-controller="dat_dil_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">総合 - 日別</div>
+    </ons-toolbar>
+        過去総合 ： <select ng-options=" ym for ym in pay_s_ym" ng-model="key" ng-change="dat_dil_show()"></select>
+        <div class="table_all">
+            
+        <table border="1">
+            <tr>
+                <td></td><td>総合売上</td><td>カード売上</td><td>売掛</td><td>日払</td><td>自腹</td><td>経費</td><td>酒代</td><td>キャンペーン</td><td>返金</td><td>今月入金</td><td>今月カード</td><td>先月入金</td><td>先月カード</td><td>持ち帰り</td><!-- <td>自腹</td><td>備考</td><td>送り</td> -->
+            </tr>
+            <tr>
+                <td>合計</td><td>{{sum.mai|number}}</td><td>{{sum.car|number}}</td><td>{{sum.cre|number}}</td><td>{{sum.dp|number}}</td><td>{{sum.jib|number}}</td><td>{{sum.cos|number}}</td><td>{{sum.sak|number}}</td><td>{{sum.cp|number}}</td><td>{{sum.hen|number}}</td><td>{{sum.this|number}}</td><td>{{sum.this_c|number}}</td><td>{{sum.last|number}}</td><td>{{sum.last_c|number}}</td><td>{{sum.to|number}}</td><!-- <td>自腹</td><td>備考</td><td>送り</td> -->
+            </tr>
+            <tr ng-repeat="dil in dils">
+                <td><ons-list><ons-list-item ng-click="show(item)">
+                    {{$index+1}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.mai|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.car|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.cre|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.dp|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.jib|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.cos|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.sak|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.cp|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.hen|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.this|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.this_c|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.last|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.last_c|number}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{dil.to|number}}
+                </ons-list-item></ons-list></td>
+                <!-- <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.jib}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.bik}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.oku}}
+                </ons-list-item></ons-list></td> -->
+                
+            </tr>
+        </table>
+        </div>
+</ons-page>

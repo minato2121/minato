@@ -1,0 +1,58 @@
+/*
+font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+
+*/
+
+div.table_all{
+    font-size: 80%;
+    text-align: center;
+    padding: 1%;
+}
+table.lay_home{
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    
+}
+table.lay_home td{
+    padding: 2%;
+}
+
+
+table.lay_dil{
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    
+}
+table.lay_dil td{
+    border-bottom: thin;
+    border-bottom-style: dashed;
+    font-size: 95%;
+}
+
+table.no_t{
+    table-layout: fixed;
+    width: 100%;
+    font-size: 85%;
+    text-align: center;
+    border: solid;
+}
+table.dat_sou{
+    table-layout: fixed;
+    width: 100%;
+}
+table.all_t{
+    font-size: 90%;
+    table-layout: fixed;
+    text-align: center;
+    padding: 1%;
+    width: 100%;
+}
+table.all_t td{
+    padding: 2%
+    font-size: 95%;
+}
+table.dat_t{
+    
+}

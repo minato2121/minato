@@ -1,0 +1,37 @@
+<ons-page ng-controller="login_Controller">
+  <ons-toolbar>
+    <div class="center">Log In</div>
+    <div class="right"><ons-toolbar-button>Close</ons-toolbar-button></div>
+  </ons-toolbar>
+    <br>
+    <form name="loginform" ng-submit="onsubmit()" novalidate>
+        <div>
+            <input id="name" name="name" type="text"  required class="text-input--underbar" placeholder="Name" autocomplete="on" ng-model="login.name" />
+            
+        </div>
+        <br>
+        <div>
+            <input id="id" name="id" type="text"  required class="text-input--underbar" placeholder="ID" autocomplete="on" ng-model="login.id"/>
+            
+        </div>
+        <br>
+        <div>
+            <input id="passwd" name="passwd" type="password"  required class="text-input--underbar" placeholder="Password" autocomplete="on" ng-model="login.pass"/>
+            
+            <br><br>
+            <ons-button modifier="large" class="login-button" ng-disabled="loginform.$invalid ||loginform.$submitted" ng-click="onlog()">Log In</ons-button>
+        </div>
+    </form>
+    <br/>
+    <div>    
+        {{data}}
+    </div>
+    <ons-modal var="myModal">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+    </ons-modal>
+</ons-page>
+<!-- 
+<span ng-show="loginform.name.$error.required">必須</span>
+<span ng-show="loginform.id.$error.required">必須</span>
+<span ng-show="loginform.passwd.$error.required">必須</span>
+-->

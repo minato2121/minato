@@ -1,0 +1,85 @@
+<ons-page ng-controller="pay_s_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">給料明細</div>
+    </ons-toolbar>
+    <!--  colspan="2" -->
+    <table class="lay_dil">
+        <tr>
+            <td><select ng-options=" cast for cast in casts" ng-model="pay_s.nam" ng-change="pay_s_show()"></select></td>
+            <td><select ng-options=" ym for ym in pay_s_ym" ng-model="key" ng-change="pay_s_show()"></select></td>
+            <td><ons-icon icon="calculator" size="25px" fixed-width="true" ng-click="simu()"></ons-icon></td>
+        </tr>
+        <tr>
+    		<td>日給総額</td><td><input ng-model="pay_s.syu" style="display:inline-block; width:100px;"/></td><td>{{pay_s.day_s|number}}</td>
+    	</tr>
+        <tr>
+            <td>同伴本数</td><td><input ng-model="pay_s.d_cnt" style="display:inline-block; width:100px;"/></td><td>{{pay_s.d_pri|number}}</td>
+        </tr>
+        <tr>
+            <td>本指名</td><td><input ng-model="pay_s.s_cnt" style="display:inline-block; width:100px;"/></td><td>{{pay_s.s_pri|number}}</td>
+        </tr>
+        <tr>
+            <td>場内指名</td><td><input ng-model="pay_s.j_cnt" style="display:inline-block; width:100px;"/></td><td>{{pay_s.j_pri|number}}</td>
+        </tr>
+        <tr>
+            <td>ヘルプ指名</td><td><input ng-model="pay_s.h_cnt" style="display:inline-block; width:100px;"/></td><td>{{pay_s.h_pri|number}}</td>
+        </tr>
+        <tr>
+            <td>紹介数</td><td><input ng-model="pay_s.syo_cnt" style="display:inline-block; width:100px;"/></td><td>{{pay_s.syo_pri|number}}</td>
+        </tr>
+        <tr>
+            <td>CP</td><td></td><td>{{pay_s.cp|number}}</td>
+        </tr>
+        <tr>
+            <td>即日CP</td><td></td><td>{{pay_s.d_cp|number}}</td>
+        </tr>
+        <tr>
+            <td>売上</td><td></td><td><input type="number" ng-model="pay_s.sub" style="display:inline-block; width:120px;"/></td>
+        </tr>
+        <tr>
+            <td>売上バック</td><td>{{pay_s.sub_bac+'%'}}</td><td>{{pay_s.sub_pri|number}}</td>
+        </tr>
+        <tr>
+            <td>給与総額</td><td></td><td>{{pay_s.total_s|number}}</td>
+        </tr>
+        <tr>
+            <td>源泉所得税</td><td></td><td>{{pay_s.gen|number}}</td>
+        </tr>
+        <tr>
+            <td>入金</td><td></td><td><input type="number" ng-model="pay_s.pay" style="display:inline-block; width:120px;"/></td><!-- {{pay_s.pay|number}} -->
+        </tr>
+        <tr>
+            <td>売掛</td><td></td><td>{{pay_s.cre|number}}</td>
+        </tr>
+        <tr>
+            <td>自腹</td><td></td><td>{{pay_s.jib|number}}</td>
+        </tr>
+        <tr>
+            <td>日払い</td><td></td><td>{{pay_s.dp|number}}</td>
+        </tr>
+        <tr>
+            <td>ペナルティ</td><td></td><td>{{pay_s.pen|number}}</td>
+        </tr>
+        <tr>
+            <td>経費</td><td></td><td>{{pay_s.cos|number}}</td>
+        </tr>
+        <tr ng-repeat="fe in pay_s.fe">
+            <td>{{fe.itm}}</td><td></td><td>{{fe.pri|number}}</td>
+        </tr>
+        <tr>
+            <td>給与マイナス</td><td></td><td>{{pay_s.min|number}}</td>
+        </tr>
+        <tr>
+            <td>手取り</td><td></td><td>{{pay_s.n_income|number}}</td>
+        </tr>
+    </table>
+    
+</ons-page>
+<!-- 
+ colspan="2"
+<tr>
+            <td></td>
+        </tr>
+
+-->

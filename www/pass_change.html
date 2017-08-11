@@ -1,0 +1,21 @@
+<ons-page ng-controller="login_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">パスワード変更</div>
+    </ons-toolbar>
+    <br />
+    <form name="pass_form" ng-submit="onsubmit()" novalidate>
+            <input type="text"  required class="text-input--underbar" placeholder="新しいパスワード" autocomplete="on" ng-model="pass1" />
+            <br/>
+            <input type="text"  required class="text-input--underbar" placeholder="もう一度入力" autocomplete="on" ng-model="pass2"/>
+            <br/>
+            <ons-button modifier="large" class="pass-button" ng-disabled="pass_form.$invalid ||pass_form.$submitted" ng-click="onpass()">変更</ons-button>
+    </form>
+    <br />
+    <div>    
+        {{log}}
+    </div>
+</ons-page>
+<!-- 
+
+-->

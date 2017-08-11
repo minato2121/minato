@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+     -->
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-resource.min.js"></script>
+    
+    <!-- ONSEN UI -->
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+
+    
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment.min.js"></script>
+  
+    <!--AngularJS bootstrap-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.5/angular-locale_ja-jp.js"></script>
+    <script src="app.js"></script>
+<!-- Optional theme 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+-->
+
+</head>
+
+<!-- 
+<label>出勤<input type="checkbox" id="syu" ng-model="syu.syu1"></label>
+                <label>当欠<input type="checkbox" id="tou" ng-model="syu.syu2"></label>aa
+                <label>無欠<input type="checkbox" id="mu" ng-model="syu.syu3"></label>
+-->
+<body>
+    
+    <ons-navigator var="nav" page="no_t.html"></ons-navigator>
+    
+    
+
+    
+    <!-- 出勤ダイアログ -->
+    <div  ng-controller="modal_Controller">
+        <script type="text/ng-template" id="attendance.html">
+            <div ng-repeat="itm in dat_syo">
+            <p>
+                {{itm.nam}}：
+                <label><input type="radio" id="syu1{{$index}}" value="出勤" ng-model="itm.syu"/>出勤</label>
+                <label><input type="radio" id="syu2{{$index}}" value="当欠" ng-model="itm.syu"/>当欠</label>
+                <label><input type="radio" id="syu3{{$index}}" value="無欠" ng-model="itm.syu"/>無欠</label>
+                <label><input type="radio" id="syu4{{$index}}" value="" ng-model="itm.syu" />休み</label>
+                <input type="number" placeholder="ペナ" id=pen{{$index}} ng-model="itm.pen" style="width: 60px;">
+            </p>
+
+            </div>
+            <ons-button ng-click="syu_add()">OK</ons-button>
+            <ons-button ng-click="syu_can()">CAN</ons-button>
+    
+        </script>
+    </div>
+    <!-- CPダイアログ <input type="checkbox" id="chk{{$index}}" ng-model="cp.chk"/> ng-required="cp.chk"-->
+    <div  ng-controller="cp_Controller">
+        <script type="text/ng-template" id="cp.html">
+        </br>
+        <p>キャンペーン</p>
+        
+        <table border="1">
+            <tr>
+            	<td>名前</td><td>金額</td><td>合計</td><td>さくじょ</td>
+        	</tr>
+            <tr ng-repeat="cps in cp">
+                <td>{{cps.nam}}</td>
+                <td><input type="text" id="cp_pri{{$index}}" ng-model="cps.pri" placeholder="金額" size="11px"/></td>
+                <td>{{cps.sum}}</td>
+                <td><input type="checkbox" id="cp_chk{{$index}}" ng-model="cps.chk"/></td>
+            </tr>
+        </table>
+        <!--
+        <form name="cp_form" novalidate>
+            <div ng-repeat="cps in cp">
+            <p>
+                {{cps.nam}}：
+                <input type="text" id="cp_pri{{$index}}" ng-model="cps.pri" placeholder="金額" size="11px"/>
+                合計：{{cps.sum}}
+            </p>
+            </div>
+        </form>
+        -->
+                </br>
+                <ons-button ng-click="cpadd()" ng-disabled="cost_form.$invalid">OK</ons-button>
+                <ons-button ng-click="cpdel()">DEL</ons-button>
+                <ons-button ng-click="cpcls()">CLS</ons-button>
+                </br>
+        
+        <br/>
+        
+        </script>
+    </div>
+    <!-- 日払いダイアログ <input type="checkbox" id="chk{{$index}}" ng-model="dp.chk"/> ng-required="dp.chk"-->
+    <div  ng-controller="dp_Controller">
+        <script type="text/ng-template" id="dp.html">
+        </br>
+        <p>日払い</p>
+        <form name="dp_form" novalidate>
+        
+            
+            <table  ng-repeat="dps in dp">
+                <tr>
+                    <td>{{dps.nam}} ： </td>
+                </tr>
+                <tr>
+    	            <td><input type="text" id="dp{{$index}}" ng-model="dps.dp" placeholder="日払い" size="6px"/></td>
+                    <td><input type="text" id="set{{$index}}" ng-model="dps.set" placeholder="ヘアセット" size="6px"/></td>
+                    <td><input type="text" id="ryo{{$index}}" ng-model="dps.ryo" placeholder="寮" size="6px"/></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="ren{{$index}}" ng-model="dps.ren" placeholder="レンタル" size="6px"/></td>
+                    <td><input type="text" id="sou{{$index}}" ng-model="dps.sou" placeholder="送迎" size="6px"/></td>
+                    <td><input type="text" id="cle{{$index}}" ng-model="dps.cle" placeholder="クリーニング" size="6px"/></td>
+            	</tr>
+                <tr>
+                    <td><input type="text" id="mei{{$index}}" ng-model="dps.mei" placeholder="名刺" size="6px"/></td>
+                    <td><input type="text" id="etc{{$index}}" ng-model="dps.etc" placeholder="その他" size="6px"/></td>
+		            <td><input type="text" id="cp{{$index}}" ng-model="dps.cp" placeholder="キャンペーン" size="6px"/></td>
+                </tr>
+            </table>
+            <!--
+            <div ng-repeat="dps in dp">
+            <p>
+                {{dps.nam}}：
+                <input type="text" id="dp{{$index}}" ng-model="dps.dp" placeholder="日払い" size="6px"/>
+                <input type="text" id="set{{$index}}" ng-model="dps.set" placeholder="ヘアセット" size="6px"/></br>
+                <input type="text" id="ryo{{$index}}" ng-model="dps.ryo" placeholder="寮" size="6px"/>
+                <input type="text" id="ren{{$index}}" ng-model="dps.ren" placeholder="レンタル" size="6px"/>
+                <input type="text" id="sou{{$index}}" ng-model="dps.sou" placeholder="送迎" size="6px"/></br>
+                <input type="text" id="cle{{$index}}" ng-model="dps.cle" placeholder="クリーニング" size="6px"/>
+                <input type="text" id="mei{{$index}}" ng-model="dps.mei" placeholder="名刺" size="6px"/>
+                <input type="text" id="cp{{$index}}" ng-model="dps.cp" placeholder="キャンペーン" size="6px"/></br>
+                <p>----------------------------------</p>
+            </p>
+            </div>
+            -->
+                </br>
+                <ons-button ng-click="dpadd()" ng-disabled="cost_form.$invalid">OK</ons-button>
+                <ons-button ng-click="dpdel()">DEL</ons-button>
+                <ons-button ng-click="dpcls()">CLS</ons-button>
+                </br>
+        </form>
+        <br/>
+        
+        </script>
+    </div>
+    <!-- 経費ダイアログ -->
+    <div  ng-controller="cost_Controller">
+        <script type="text/ng-template" id="cost.html">
+        </br>
+        <form name="cost_form" novalidate>
+            <div ng-repeat="itms in cos_itm">
+            <p>
+                <input type="text" id="itm{{$index}}" ng-model="itms.itm" placeholder="品名" size="13px" ng-required="itms.chk"/>
+                <input type="text" id="pri{{$index}}" ng-model="itms.pri" placeholder="金額" size="11px" ng-required="itms.chk"/>
+                <input type="checkbox" id="chk{{$index}}" ng-model="itms.chk"/>
+            </p>
+            </div>
+                <input type="text" id="itm_e" ng-model="cos_my.itm" placeholder="品名" size="13px" ng-required="cos_my.chk"/>
+                <input type="text" id="pri_e" ng-model="cos_my.pri" placeholder="金額" size="11px" ng-required="cos_my.chk"/>
+                <input type="checkbox" id="chk_c" ng-model="cos_my.chk"/>
+                </br></br>
+                <ons-button ng-click="cosadd()" ng-disabled="cost_form.$invalid">OK</ons-button>
+                <ons-button ng-click="cosdel()">DEL</ons-button>
+                <ons-button ng-click="coscls()">CLS</ons-button>
+        </form>
+        <hr/>
+        
+        <table class="all_t">
+            <tr>
+            	<td>品名</td><td>金額</td>
+        	</tr>
+            <tr>
+                <td><ons-list><ons-list-item ng-repeat="s in cos_s"><ons-gesture-detector ng-hold="hold(s.no)">{{s.itm}}</ons-gesture-detector></ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-repeat="s in cos_s"><ons-gesture-detector ng-hold="hold(s.no)">{{s.pri}}</ons-gesture-detector></ons-list-item></ons-list></td>
+        	</tr>
+        </table>
+        <!--
+        <ons-list>
+            <ons-list-item ng-repeat="s in cos_s">
+                <ons-gesture-detector ng-hold="hold(s.no)">
+                    {{s.itm}}：{{s.pri}}
+                </ons-gesture-detector>
+            </ons-list-item>
+        </ons-list>
+        -->
+        </script>
+    </div>
+    <!-- 入金ダイアログ -->
+    <div  ng-controller="pay_Controller">
+        <script type="text/ng-template" id="pay.html">
+        </br>
+        入力
+        </br></br>
+        <form name="pay_form" novalidate>
+            <select ng-options=" cast for cast in casts" ng-model="r_cre.nam"></select>
+            <label><input type="radio" ng-model="pay.m" value="0">今月</label>
+            <label><input type="radio" ng-model="pay.m" value="1">先月</label>
+            <label><input type="checkbox" ng-model="pay.car" ng-init="pay.car=false">カード</label></br>
+            <input type="text" ng-model="pay.gue" ng-init="pay.gue=''" placeholder="お客様名 *必須入力" required></br>
+            <input type="number" ng-model="pay.pri" ng-init="pay.pri=''" placeholder="入金額 *必須入力" required></br>
+            <input type="number"ng-model="pay.ymd" ng-init="pay.ymd=''" placeholder="日付 *任意入力"></br>
+            </br></br>
+            <ons-button ng-click="payadd()" ng-disabled="pay_form.$invalid">OK</ons-button>
+            <ons-button ng-click="paycls()">CLS</ons-button>
+        </form>
+        <hr/>
+        <!--
+        <ons-list>
+            <ons-list-item ng-repeat="pay in pays">
+                <ons-gesture-detector ng-hold="p_hold(pay)">
+                    <div class="test"> {{pay.nam}}　　{{pay.gue}}　　{{pay.pay}}<p ng-hide="pay.flg">今月</p><div ng-show="pay.flg">先月</div><div ng-show="pay.car">カード</div></div>
+                </ons-gesture-detector>
+            </ons-list-item>
+        </ons-list>
+        -->
+        <table class="table">
+                <tr>
+                    <td>担当</td><td>名前</td><td>入金</td><td>月</td><td>カード</td>
+                </tr>
+            <tr ng-repeat="pay in pays">
+                    <td><ons-gesture-detector ng-hold="p_hold(pay)">{{pay.nam}}</ons-gesture-detector></td>
+                    <td><ons-gesture-detector ng-hold="p_hold(pay)">{{pay.gue}}</ons-gesture-detector></td>
+                    <td><ons-gesture-detector ng-hold="p_hold(pay)">{{pay.pay}}</ons-gesture-detector></td>
+                    <td ng-hide="pay.flg"><ons-gesture-detector ng-hold="p_hold(pay)">今月</ons-gesture-detector></td>
+                    <td ng-show="pay.flg"><ons-gesture-detector ng-hold="p_hold(pay)">先月</ons-gesture-detector></td>
+                    <td ng-show="pay.car"><ons-gesture-detector ng-hold="p_hold(pay)">○</ons-gesture-detector></td>
+                
+            </tr>
+        </table>
+        
+        </script>
+    </div>
+</body>
+</html>
+

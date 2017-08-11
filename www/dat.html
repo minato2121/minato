@@ -1,0 +1,107 @@
+<ons-page ng-controller="dat_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">日計表</div>
+    </ons-toolbar>
+    <div class="input-group">
+        <input type="text" 
+        class="form-control" 
+        ng-model="datepicker.time"
+        uib-datepicker-popup="{{datepicker.format}}"
+        is-open="datepicker.open"
+        show-button-bar="false"
+        ng-change="show_d()"/>
+    
+        <div class="input-group-addon" ng-click="toggleDatePicker($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+    </div>
+    <hr />
+    <!-- 
+    <input type="nambar" name="year" ng-model="mydate.year" ng-init="mydate.year=''" placeholder="年" size="5" maxlength="4"/>
+        <input type="nambar" name="month" ng-model="mydate.month" ng-init="mydate.month=''" placeholder="月" size="5" maxlength="2"/>
+        <input type="nambar" name="day" ng-model="mydate.day" ng-init="mydate.day=''" placeholder="日" size="5" maxlength="2"/>
+        <input type="submit" value="表示" ng-click="show_d()"/>
+         -->
+    <form name="dat_form" id="test">
+        <table border="1" class="dat_t">
+            <tr>
+                <td></td><td>同</td><td>新</td><td>本指名</td><td>お客様</td><td>卓番</td><td>人数</td><td>IN</td><td>紹介</td><td>ヘル指</td><td>場内</td><td>売上</td><td>合計</td><td>カード</td><td>売掛</td><td>自腹</td><td>備考</td><td>送り</td>
+            </tr>
+            <tr ng-repeat="item in dat">
+                <td><ons-list><ons-list-item ng-click="show(item)">
+                    {{$index+1}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.dou}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.new}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.nam}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.gue}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.tab}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.cnt}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.in}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.syo}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.her}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.jou}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.sub}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.mai}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.car}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.cre}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.jib}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.bik}}
+                </ons-list-item></ons-list></td>
+                <td><ons-list><ons-list-item ng-click="show_1(item)">
+                    {{item.oku}}
+                </ons-list-item></ons-list></td>
+                
+            </tr>
+        </table>
+    </form>
+
+</ons-page>
+<!-- 
+<td>{{item.new}}</td>
+<td>{{item.nam}}</td>
+<td>{{item.gue}}</td>
+<td>{{item.tab}}</td>
+<td>{{item.cnt}}</td>
+<td>{{item.in}}</td>
+<td>{{item.syo}}</td>
+<td>{{item.her}}</td>
+<td>{{item.jou}}</td>
+<td>{{item.sub|currency:'￥':0}}</td>
+<td>{{item.mai|currency:'￥':0}}</td>
+<td>{{item.car|currency:'￥':0}}</td>
+<td>{{item.cre|currency:'￥':0}}</td>
+<td>{{item.jib|currency:'￥':0}}</td>
+ -->

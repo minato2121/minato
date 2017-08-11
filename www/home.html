@@ -1,0 +1,41 @@
+<ons-page ng-controller="home_Controller">
+    <ons-toolbar>
+        <div class="center"><span style="font-size:1em">Home</span></div>
+    </ons-toolbar>
+    <div class="table_all">
+        <table class="lay_home">
+            <tr>
+        		<td><ons-icon icon="pencil-square-o" size="50px" fixed-width="true" ng-click="on1()"></ons-icon><br />伝票</td>
+                <td><ons-icon icon="trophy" size="50px" fixed-width="true" ng-click="on2()"></ons-icon><br />NO表</td>
+                <td><ons-icon icon="fa-file-text-o" size="50px" fixed-width="true" ng-click="on3()"></ons-icon><br />掛け</td>
+                <td><ons-icon icon="fa-jpy" size="50px" fixed-width="true" ng-click="on4()"></ons-icon><br />給料明細</td>
+        	</tr>
+            <tr>
+                <td><ons-icon icon="clipboard" size="50px" fixed-width="true" ng-click="on13()"></ons-icon><br />予定表</td>
+                <td></td>
+                <td ng-show="show"><ons-icon icon="folder-o" size="50px" fixed-width="true" ng-click="on14()"></ons-icon><br />経費-月別</td>
+                <td ng-show="show"><ons-icon icon="calculator" size="50px" fixed-width="true" ng-click="on10()"></ons-icon><br />給料-総合</td>
+            </tr>
+            <tr>
+                <td ng-show="show"><ons-icon icon="table" size="50px" fixed-width="true" ng-click="on5()"></ons-icon><br />日計表</td>
+                <td ng-show="show"><ons-icon icon="list-alt" size="50px" fixed-width="true" ng-click="on6()"></ons-icon><br />日計表-詳</td>
+                <td ng-show="show"><ons-icon icon="clone" size="50px" fixed-width="true" ng-click="on7()"></ons-icon><br />日計表-総</td>
+                <td ng-show="show"><ons-icon icon="database" size="50px" fixed-width="true" ng-click="on8()"></ons-icon><br />総合-日別</td>
+            </tr>
+            <tr>
+                <td ng-show="show"><ons-icon icon="user-plus" size="50px" fixed-width="true" ng-click="on9()"></ons-icon><br />ID管理</td>
+                <td ng-show="show"><ons-icon icon="book" size="50px" fixed-width="true" ng-click="on15()"></ons-icon><br />MENU設定</td>
+                <td ng-show="show"><ons-icon icon="bar-chart" size="50px" fixed-width="true" ng-click="on11()"></ons-icon><br />給料設定</td>
+                <td ng-show="show"><ons-icon icon="cog" size="50px" fixed-width="true" ng-click="on12()"></ons-icon><br />設定</td>
+        	</tr>
+        </table>
+    </div>
+    <ons-modal var="myModal">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+    </ons-modal>
+<div class="modal" ng-show="showModal">
+    <spinner ng-show="showSpinner"></spinner>
+    <p>{{modalMessage}}</p>
+  </div>
+     
+</ons-page>

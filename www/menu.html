@@ -1,0 +1,33 @@
+<ons-page ng-controller="menu_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button >Back</ons-back-button></div>
+        <div class="center">メニュー追加･削除</div>
+    </ons-toolbar>
+    <br />
+    <form name="menu_form" novalidate>
+                <input id="item" type="text" required class="text-input--underbar" placeholder="品名" ng-model="menu.item"/>
+                <input id="price" type="text" required class="text-input--underbar" placeholder="単価" ng-model="menu.price"/>
+                <input id="class" type="text" required class="text-input--underbar" placeholder="区分" ng-model="menu.class"/>
+            <br/>
+            <ons-button ng-click="onadd()" ng-disabled="menu_form.$invalid">追加</ons-button>
+            <ons-button ng-click="ondel()" ng-disabled="chkname.$invalid">削除</ons-button>
+        <hr />
+        
+            <table class="table">
+                <tr>
+                    <td>品名</td><td>単価</td><td>区分</td>
+                </tr>          
+                <tr ng-repeat="menu in menus | orderBy: ['class','price']">                 
+                    <td><input type="checkbox" ng-model="menu.chk" value="{{menu.item}}">{{menu.item}}</td>
+                    <td>{{menu.price|currency:'￥':0}}</td>
+                    <td>{{menu.class}}</td>
+                    
+                </tr>  
+            </table>
+        
+            
+    </form>
+</ons-page>
+<!--
+<div style="width:315px;height:350px;overflow:auto;"></div>
+-->

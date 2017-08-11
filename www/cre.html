@@ -1,0 +1,44 @@
+<ons-page ng-controller="cre_Controller">
+    <ons-toolbar>
+        <div class="left"><ons-back-button >Back</ons-back-button></div>
+        <div class="center">売掛表</div>
+    </ons-toolbar>
+    <br />
+    <form name="cre_form" id="cre_form" novalidate>
+                
+                <select ng-options=" cast for cast in casts" ng-model="r_cre.nam" ng-change="cre_show()"></select>
+                    <!--<option value="">担当名</option>  -->
+                
+                <select ng-options=" year as year +'年' for year in my_years" ng-model="my_year" ng-change="cre_year()"></select>
+                <input id="nam" type="text" class="text-input--underbar" placeholder="お客様名" ng-model="r_cre.gue"/>
+            <br/>
+            <ons-button ng-click="cre_show()" ng-disabled="cre_form.$invalid">合計</ons-button>
+            <ons-button ng-click="cre_show_this()" ng-disabled="cre_form.$invalid">今-合計</ons-button>
+            <ons-button ng-click="cre_show_last()" ng-disabled="cre_form.$invalid">先-合計</ons-button><br/>
+            <ons-button ng-click="cre_syo()">掛-詳細</ons-button>
+            <ons-button ng-click="pay_syo()">入-詳細</ons-button>
+            <ons-button ng-click="pay_add()" ng-disabled="cre_form.$invalid" ng-if="show == true">入金</ons-button>
+            <br/>
+            <p ng-show="switch._1">合計売掛額　：　￥{{sum.cre|number}}<p><p ng-show="switch._2">合計入金額　：　￥{{sum.pay|number}}<p>
+            
+            <table class="table">
+                <tr>
+                    <td>名前</td><td ng-show="switch._1">売掛</td><td ng-show="switch._2">入金</td><td ng-show="switch._0">差額</td><td ng-hide="switch._0">日付</td>
+                </tr>          
+                <tr ng-repeat="cres in mycre | orderBy: ['-no']">
+                    <td>{{cres.gue}}</td>
+                    <td ng-show="switch._1">{{cres.cre|number}}</td>
+                    <td ng-show="switch._2">{{cres.pay|number}}</td>
+                    <td ng-show="switch._0">{{cres.rem|number}}</td>
+                    <td ng-hide="switch._0">{{cres.no}}</td>
+                </tr>
+            </table>
+        <!-- <div style="width:315px;height:350px;overflow:auto;"></div>  -->
+    </form>
+</ons-page>
+<!--<select name="cre.nam" ng-model="cre.nam" required>
+                    <option ng-repeat="casts in cast">{{casts.nam}}</option>
+                </select>  
+<ons-button ng-click="cre_show()" ng-disabled="cre_form.$invalid">表示</ons-button>
+-->
+                
